@@ -6,8 +6,8 @@ taskongoing = False
 # PEP8 Configurations.
 
 def taskCompleted(btnName, task,tasks,b):
-    if btnName == 'Complete':
-        if b['status'] == True and b['name'] == task:
+    if btnName == 'Complete' and b["status"] == True:
+        if b['status'] == True:
             tasks.remove(task)
             clear('creatingTasks')
             print('Complete',b)
@@ -16,8 +16,10 @@ def taskCompleted(btnName, task,tasks,b):
                     [i, put_buttons(['Complete', 'Ongoing'],onclick = partial(taskCompleted, task = i,tasks = tasks,b =  test ))] for i in tasks
                 ],scope = 'creatingTasks',
             )
+            
         else:
             put_error(f'The Task of {task} has to be ongoing before it is completed', closable=True)
+        return 0
     if btnName == 'Ongoing':
         ongoingmessage = put_info(f"The task {task} is currently ongoing", closable=True)
         b['status'] = True
@@ -29,7 +31,7 @@ def taskCompleted(btnName, task,tasks,b):
                 [i, put_buttons(['Complete', 'Ongoing'],onclick = partial(taskCompleted, task = i,tasks = tasks,b =  test ))] for i in tasks
             ],scope = 'creatingTasks',
         )
-
+        return 0
         
 # {'name':task,'status':taskongoing}
         
